@@ -1,29 +1,65 @@
+require 'byebug'
+# apply two4one to a price and a number of items
+class Two4one
+  attr_reader :num
+  attr_reader :price
+
+  def initialize(num, price)
+    @num = num
+    @price = price
+  end
+
+  def get_price
+    items_par, remain = num.divmod(2)
+    (remain + items_par) * price
+  end
+end
+
+# apply minus1up22 to a price and a number of items
+class Minus1up2two
+  attr_reader :num
+  attr_reader :price
+
+  def initialize(num, price)
+    @num = num
+    @price = price
+  end
+
+  def get_price
+    num == 1 ? price : price + ((num - 1) * (price - 100))
+  end
+end
+
 # create a list of product and applies the pricing_rules (price and reduction's rules)
 class Checkout
 
+  REDUCTION = {
+    two4one: Two4one,
+    minus1up22: Minus1up2two
+  }
+
   def initialize(pricing_rules)
-    @items_scan = []
+    @items_scan = Hash.new(0)
     @reductions = pricing_rules[:reductions]
     @prices = pricing_rules[:prices]
   end
 
   def scan(product)
-    @items_scan << product
+    @items_scan[product] += 1
   end
 
   def total_price
-    items_scaned = []
-    @items_scan.inject(0) do |sum, item|
-      items_scaned << item
-      items_num = items_scaned.select{|item_in_select| item_in_select == item}.count
-      sum = sum + fix_price_with_reduction( items_num, @prices[item], @reductions[item])
+    amount = 0
+    @items_scan.each do |item, num|
+      amount += total_price_for_item(num, item)
     end
+    return amount
   end
 
   private
-  def fix_price_with_reduction(num, price, reduction)
-    return 0 if ( reduction == :two4one && num % 2 == 0 )
-    return price - 100 if ( reduction == :minus1up22 && num > 1)
-    price || 0
+  def total_price_for_item(num, item)
+    reduction = REDUCTION[@reductions[item]]
+    price = @prices[item]
+    !!reduction ? reduction.new(num, price).get_price : (price * num)
   end
 end
