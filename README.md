@@ -1,5 +1,6 @@
 # README
 
+* This is an example to use test when refactorize
 * note about how is structured in git this application  
   The following branch are created:  
   master: where the application lays whith uggly code without refactory  
