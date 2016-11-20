@@ -2,8 +2,12 @@
 
 * note about how is structured in git this application  
   The following branch are created:  
-  master: where the application without refactory lays  
-  strategy: where the application refactor with stategy pattern lays
+  master: where the application lays whith uggly code without refactory  
+  strategy: where the application is refactorized with stategy pattern lays  
+  So to see the code once refactorized, run
+  <pre>
+    git checkout strategy
+  <pre>
 
 * Gem
   we use:  
