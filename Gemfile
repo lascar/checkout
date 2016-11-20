@@ -1,5 +1,5 @@
 source "http://rubygems.org"
 
 gem 'rspec'
-gem 'byebug'
+gem 'byebug', require: true
 gem 'reek'
