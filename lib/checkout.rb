@@ -1,4 +1,3 @@
-require 'byebug'
 # apply two4one to a price and a number of items
 class Two4one
   attr_reader :num
