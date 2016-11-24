@@ -30,6 +30,8 @@
   This script lays in the 'script' directory of our application.  
   In order to install it, we have to run (on the root of our application):
   <pre>
+  mkdir log
+  chmod 755 script/pre-commit.sh
   ln -s ../../script/pre-commit.sh .git/hooks/pre-commit
   </pre>
   NB: symlinks are resolved by git as relative
