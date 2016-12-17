@@ -5,9 +5,14 @@
   The following branch are created:  
   master: where the application lays whith uggly code without refactory  
   strategy: where the application is refactorized with stategy pattern lays  
+  lambda: where the strategy is refactorized with lambda proc
   So to see the code once refactorized, run
   <pre>
     git checkout strategy
+  <pre>
+  or
+  <pre>
+    git checkout lambda
   <pre>
 
 * Gem
