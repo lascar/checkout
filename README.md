@@ -9,11 +9,11 @@
   So to see the code once refactorized, run
   <pre>
     git checkout strategy
-  <pre>
+  </pre>
   or
   <pre>
     git checkout lambda
-  <pre>
+  </pre>
 
 * Gem
   we use:  
