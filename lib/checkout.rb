@@ -1,40 +1,20 @@
-# apply two4one to a price and a number of items
-class Two4one
-  attr_reader :num
-  attr_reader :price
-
-  def initialize(num, price)
-    @num = num
-    @price = price
-  end
-
-  def get_price
+require 'byebug'
+# create a list of product and applies the pricing_rules (price and reduction's rules)
+class Checkout
+  # apply two4one to a price and a number of items
+  two4one = -> (num, price) do
     items_par, remain = num.divmod(2)
     (remain + items_par) * price
   end
-end
 
-# apply minus1up22 to a price and a number of items
-class Minus1up2two
-  attr_reader :num
-  attr_reader :price
-
-  def initialize(num, price)
-    @num = num
-    @price = price
-  end
-
-  def get_price
+  # apply minus1up22 to a price and a number of items
+  minus1up22 = -> (num, price) do
     num == 1 ? price : price + ((num - 1) * (price - 100))
   end
-end
-
-# create a list of product and applies the pricing_rules (price and reduction's rules)
-class Checkout
 
   REDUCTION = {
-    two4one: Two4one,
-    minus1up22: Minus1up2two
+    two4one: two4one,
+    minus1up22: minus1up22
   }
 
   def initialize(pricing_rules)
@@ -59,6 +39,6 @@ class Checkout
   def total_price_for_item(num, item)
     reduction = REDUCTION[@reductions[item]]
     price = @prices[item]
-    !!reduction ? reduction.new(num, price).get_price : (price * num)
+    !!reduction ? reduction.call(num, price) : (price * num)
   end
 end
